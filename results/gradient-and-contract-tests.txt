@@ -1,0 +1,20 @@
+gradient checks (finite differences, float64)
+  [ok ] add+mul broadcast            max rel err 6.5e-10
+  [ok ] matmul (batched x 2-D)       max rel err 5.3e-10
+  [ok ] reshape+transpose            max rel err 1.4e-10
+  [ok ] sum(axis)                    max rel err 1.7e-10
+  [ok ] gelu                         max rel err 2.0e-10
+  [ok ] softmax                      max rel err 1.9e-08
+  [ok ] layer_norm                   max rel err 3.5e-10
+  [ok ] take_rows (repeated idx)     max rel err 1.4e-10
+  [ok ] grouped_softmax_xent         max rel err 2.4e-10
+  [ok ] bce_with_logits              max rel err 5.9e-10
+end-to-end gradient check through the whole model
+  [ok ] loss wrt w_opt               max rel err 3.3e-08
+  [ok ] loss wrt w_qkv               max rel err 1.4e-08
+  [ok ] loss wrt ln1 gamma           max rel err 5.8e-07
+contract checks on a randomly initialised model
+  [ok ] probabilities sum to 1      max |sum-1| 1.1e-16
+  [ok ] option order invariance     max |dp| 5.6e-17
+  [ok ] packed pass == separate     max |dp| 5.6e-17
+all tests passed

@@ -1,0 +1,14 @@
+test_api_subset_and_single_question_types (__main__.Regressions.test_api_subset_and_single_question_types) ... ok
+test_duplicate_names_without_output_ids_are_rejected (__main__.Regressions.test_duplicate_names_without_output_ids_are_rejected) ... ok
+test_extreme_log_loss_and_derivative_agree (__main__.Regressions.test_extreme_log_loss_and_derivative_agree) ... ok
+test_lexical_fit_is_numerically_stationary (__main__.Regressions.test_lexical_fit_is_numerically_stationary) ... ok
+test_lexical_probability_scale_and_ranking (__main__.Regressions.test_lexical_probability_scale_and_ranking) ... ok
+test_limits_fail_clearly (__main__.Regressions.test_limits_fail_clearly) ... ok
+test_positive_finite_temperature (__main__.Regressions.test_positive_finite_temperature) ... ok
+test_serialized_probabilities_keep_every_hidden_option (__main__.Regressions.test_serialized_probabilities_keep_every_hidden_option) ... ok
+test_sibling_options_cannot_change_shared_log_odds (__main__.Regressions.test_sibling_options_cannot_change_shared_log_odds) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.371s
+
+OK

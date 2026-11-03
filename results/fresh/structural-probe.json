@@ -1,0 +1,19 @@
+{
+  "note": "Same state and shared candidates; only sibling options change",
+  "cases": [
+    {
+      "options": 2,
+      "model_log_odds_A_over_B": 2.081014633178711,
+      "model_odds_A_over_B": 8.012594635650895,
+      "bayes_odds_A_over_B": 2.333333333333333
+    },
+    {
+      "options": 4,
+      "model_log_odds_A_over_B": 2.081014633178711,
+      "model_odds_A_over_B": 8.012594635650895,
+      "bayes_odds_A_over_B": 6.999999999999998
+    }
+  ],
+  "model_abs_log_odds_change": 0.0,
+  "conclusion": "This scorer cannot exactly represent both Bayes posteriors. No numerical performance ceiling is established."
+}

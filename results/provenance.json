@@ -1,0 +1,10 @@
+{
+  "date": "2026-11-02",
+  "note": "Source hashes identify the recorded training execution snapshot.",
+  "executed_training_source_sha256": {
+    "autograd.py": "c6aefbd2bb70488c1632cc132368ef4f103713f9ce27db4f749a849a1b453e79",
+    "data.py": "c9ad93ed2487578c464895cae3b4a95294cc8d1a06e5d6c9b9e8c64b3e7c7e68",
+    "model.py": "f5df0e34744df3f53d1cb72f06556025c5d15a7d2934e1bf6ebf3348a5718520",
+    "train.py": "65f3ee1f88f849c4f94f63d67df4a30a8b96ccc8c8999cbbe9fcfc4a1c1a7730"
+  }
+}

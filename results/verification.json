@@ -1,0 +1,61 @@
+{
+  "checkpoints": {
+    "supplied/stream": {
+      "requests": 32,
+      "answers": 111,
+      "max_probability_sum_error": 2.220446049250313e-16,
+      "status": "passed"
+    },
+    "supplied/fixed": {
+      "requests": 32,
+      "answers": 111,
+      "max_probability_sum_error": 2.220446049250313e-16,
+      "status": "passed"
+    },
+    "supplied/other": {
+      "requests": 32,
+      "answers": 111,
+      "max_probability_sum_error": 2.220446049250313e-16,
+      "status": "passed"
+    },
+    "fresh/stream": {
+      "requests": 32,
+      "answers": 111,
+      "max_probability_sum_error": 2.220446049250313e-16,
+      "status": "passed"
+    },
+    "fresh/fixed": {
+      "requests": 32,
+      "answers": 111,
+      "max_probability_sum_error": 2.220446049250313e-16,
+      "status": "passed"
+    },
+    "fresh/other": {
+      "requests": 32,
+      "answers": 111,
+      "max_probability_sum_error": 2.220446049250313e-16,
+      "status": "passed"
+    }
+  },
+  "reproduction_delta": {
+    "stream": {
+      "acc": 0.0,
+      "ece": 1.3381638019893671e-09,
+      "nll": 5.412424952666584e-10,
+      "brier": 1.0139863393376913e-09
+    },
+    "fixed": {
+      "acc": 0.0,
+      "ece": 5.585632179005984e-09,
+      "nll": 3.026849673224488,
+      "brier": -1.7139576424796132e-09
+    },
+    "other": {
+      "acc": 0.0,
+      "ece": -2.5677800996604105e-09,
+      "nll": 1.1386067644281184e-09,
+      "brier": 7.30020266459519e-10
+    }
+  },
+  "note": "Stable log loss deliberately replaces epsilon-clipped evaluation. Archive training provenance is not independently established."
+}

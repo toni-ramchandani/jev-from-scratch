@@ -1,0 +1,219 @@
+{
+ "run": "stream",
+ "steps": 4000,
+ "batch": 32,
+ "seed": 0,
+ "train_seconds": 1152.4,
+ "log": [
+  {
+   "step": 0,
+   "loss_ema": 1.8535,
+   "sec": 0.2
+  },
+  {
+   "step": 100,
+   "loss_ema": 1.8642,
+   "sec": 28.5
+  },
+  {
+   "step": 200,
+   "loss_ema": 1.7793,
+   "sec": 56.8
+  },
+  {
+   "step": 300,
+   "loss_ema": 1.6114,
+   "sec": 84.7
+  },
+  {
+   "step": 400,
+   "loss_ema": 1.5666,
+   "sec": 112.3
+  },
+  {
+   "step": 500,
+   "loss_ema": 1.5293,
+   "sec": 140.3
+  },
+  {
+   "step": 600,
+   "loss_ema": 1.497,
+   "sec": 168.7
+  },
+  {
+   "step": 700,
+   "loss_ema": 1.4937,
+   "sec": 196.2
+  },
+  {
+   "step": 800,
+   "loss_ema": 1.505,
+   "sec": 223.5
+  },
+  {
+   "step": 900,
+   "loss_ema": 1.4908,
+   "sec": 251.7
+  },
+  {
+   "step": 1000,
+   "loss_ema": 1.4944,
+   "sec": 280.4
+  },
+  {
+   "step": 1100,
+   "loss_ema": 1.4928,
+   "sec": 311.4
+  },
+  {
+   "step": 1200,
+   "loss_ema": 1.4657,
+   "sec": 342.1
+  },
+  {
+   "step": 1300,
+   "loss_ema": 1.4615,
+   "sec": 372.3
+  },
+  {
+   "step": 1400,
+   "loss_ema": 1.4592,
+   "sec": 404.1
+  },
+  {
+   "step": 1500,
+   "loss_ema": 1.4481,
+   "sec": 436.0
+  },
+  {
+   "step": 1600,
+   "loss_ema": 1.4563,
+   "sec": 466.1
+  },
+  {
+   "step": 1700,
+   "loss_ema": 1.4583,
+   "sec": 495.1
+  },
+  {
+   "step": 1800,
+   "loss_ema": 1.4545,
+   "sec": 524.8
+  },
+  {
+   "step": 1900,
+   "loss_ema": 1.4359,
+   "sec": 551.3
+  },
+  {
+   "step": 2000,
+   "loss_ema": 1.4119,
+   "sec": 579.9
+  },
+  {
+   "step": 2100,
+   "loss_ema": 1.4122,
+   "sec": 608.4
+  },
+  {
+   "step": 2200,
+   "loss_ema": 1.4253,
+   "sec": 637.4
+  },
+  {
+   "step": 2300,
+   "loss_ema": 1.4076,
+   "sec": 665.8
+  },
+  {
+   "step": 2400,
+   "loss_ema": 1.415,
+   "sec": 694.2
+  },
+  {
+   "step": 2500,
+   "loss_ema": 1.4067,
+   "sec": 723.0
+  },
+  {
+   "step": 2600,
+   "loss_ema": 1.4179,
+   "sec": 752.7
+  },
+  {
+   "step": 2700,
+   "loss_ema": 1.4143,
+   "sec": 781.2
+  },
+  {
+   "step": 2800,
+   "loss_ema": 1.402,
+   "sec": 808.6
+  },
+  {
+   "step": 2900,
+   "loss_ema": 1.3877,
+   "sec": 834.4
+  },
+  {
+   "step": 3000,
+   "loss_ema": 1.4038,
+   "sec": 863.1
+  },
+  {
+   "step": 3100,
+   "loss_ema": 1.3768,
+   "sec": 891.6
+  },
+  {
+   "step": 3200,
+   "loss_ema": 1.3834,
+   "sec": 920.4
+  },
+  {
+   "step": 3300,
+   "loss_ema": 1.3791,
+   "sec": 949.3
+  },
+  {
+   "step": 3400,
+   "loss_ema": 1.361,
+   "sec": 978.4
+  },
+  {
+   "step": 3500,
+   "loss_ema": 1.3569,
+   "sec": 1006.9
+  },
+  {
+   "step": 3600,
+   "loss_ema": 1.3814,
+   "sec": 1035.9
+  },
+  {
+   "step": 3700,
+   "loss_ema": 1.3788,
+   "sec": 1067.1
+  },
+  {
+   "step": 3800,
+   "loss_ema": 1.3894,
+   "sec": 1096.8
+  },
+  {
+   "step": 3900,
+   "loss_ema": 1.3637,
+   "sec": 1127.8
+  },
+  {
+   "step": 3999,
+   "loss_ema": 1.3812,
+   "sec": 1152.4
+  }
+ ],
+ "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+ "numpy": "2.5.4",
+ "platform": "Windows-11-10.0.26200-SP0",
+ "parameters": 116545,
+ "checkpoint_sha256": "0ac9355707e532cf71acd203cf9e63be3b33771430e6fb37d7a922cbc87c6faf"
+}
