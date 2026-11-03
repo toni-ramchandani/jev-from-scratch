@@ -138,3 +138,17 @@ This runs 24 Choice-only models and three multitask reproduction controls, each 
 4,000 steps. It records source, data and weight hashes and retains all conditions.
 The default generator remains unchanged. Training is local and requires no API
 key. Use `--dry-run` to inspect the execution list without training.
+
+After all jobs finish, the supplementary lexical fits and aggregate checks use
+the same protocol and request streams:
+
+```bash
+python context_baselines.py --protocol ../experiments/option_context_v1.json --output ../artifacts/context-study-v1/lexical-controls.json
+python analyze_context_study.py --study-dir ../artifacts/context-study-v1
+```
+
+The analyzer checks data and initialization matches, checkpoint hashes,
+permutation checks and metrics recomputed from saved predictions. It reports
+all seeds, raw results, validation-only temperature scaling and paired
+comparisons. Three-seed standard deviations describe training variability;
+they are distinct from uncertainty over test examples.
