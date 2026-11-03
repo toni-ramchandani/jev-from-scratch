@@ -159,6 +159,8 @@ def take_rows(table, idx):
     idx = np.asarray(idx)
     out = Tensor(table.data[idx], (table,))
     def backward(g):
+        if idx.size == 0:
+            return  # An unused output head contributes no gradient.
         flat = idx.reshape(-1)
         onehot = np.zeros((flat.size, table.shape[0]), dtype=g.dtype)
         onehot[np.arange(flat.size), flat] = 1.0

@@ -60,6 +60,18 @@ class Regressions(unittest.TestCase):
             with self.assertRaises(ValueError):
                 D.collate([req])
 
+    def test_single_type_training_backward(self):
+        request = D.sample_request(D.make_rng(23))
+        for question in request['questions']:
+            single = {'state': request['state'], 'questions': [question]}
+            for p in self.model.parameters():
+                p.grad = None
+            loss, _ = self.model.loss(D.collate([single]))
+            loss.backward()
+            for p in self.model.parameters():
+                if p.grad is not None:
+                    self.assertTrue(np.isfinite(p.grad).all())
+
     def test_extreme_log_loss_and_derivative_agree(self):
         s = ag.Tensor(np.array([1000., -1000.]), requires_grad=True)
         loss = ag.grouped_softmax_xent(s, np.array([0, 0]), np.array([0., 1.]), 1)

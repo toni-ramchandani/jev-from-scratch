@@ -117,3 +117,24 @@ correctness probability. Option-order symmetry and question isolation arise from
 this implementation's mask and fixed position offsets.
 
 MIT licensed.
+
+## Controlled option-context experiments
+
+The fixed protocol in `experiments/option_context_v1.json` compares isolated
+options, explicit option count, independent random context and context pooled
+through each question. It uses two cue-noise models and three seeds per condition.
+Three additional runs compare the provided and current multitask code and a
+single-expression numerical control in the same environment.
+`experiments/reference_numpy/` preserves only the four
+provided training source files for that comparison.
+
+```bash
+cd tiny_s1
+python test_context_study.py
+python run_context_study.py --protocol ../experiments/option_context_v1.json --output-dir ../artifacts/context-study-v1 --workers 3
+```
+
+This runs 24 Choice-only models and three multitask reproduction controls, each for
+4,000 steps. It records source, data and weight hashes and retains all conditions.
+The default generator remains unchanged. Training is local and requires no API
+key. Use `--dry-run` to inspect the execution list without training.

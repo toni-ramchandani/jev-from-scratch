@@ -7,8 +7,9 @@ test_limits_fail_clearly (__main__.Regressions.test_limits_fail_clearly) ... ok
 test_positive_finite_temperature (__main__.Regressions.test_positive_finite_temperature) ... ok
 test_serialized_probabilities_keep_every_hidden_option (__main__.Regressions.test_serialized_probabilities_keep_every_hidden_option) ... ok
 test_sibling_options_cannot_change_shared_log_odds (__main__.Regressions.test_sibling_options_cannot_change_shared_log_odds) ... ok
+test_single_type_training_backward (__main__.Regressions.test_single_type_training_backward) ... ok
 
 ----------------------------------------------------------------------
-Ran 9 tests in 0.371s
+Ran 10 tests in 0.383s
 
 OK

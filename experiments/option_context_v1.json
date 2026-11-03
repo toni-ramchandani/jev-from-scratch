@@ -1,0 +1,47 @@
+{
+  "study_id": "option_context_v1",
+  "defined_on": "2026-11-03",
+  "task": "Choice only, with identical state distractors retained",
+  "worlds": ["fixed_q", "fixed_odds"],
+  "modes": ["isolated", "count", "random_count", "set"],
+  "seeds": [0, 1, 2],
+  "steps": 4000,
+  "batch": 32,
+  "job_order_seed": 20261103,
+  "reproduction_controls": ["provided_code", "current_code", "current_original_sigmoid"],
+  "reproduction_control_seed": 0,
+  "reproduction_control_task": "Multitask stream training, 4000 steps, common NumPy/Python; evaluated on legacy test seed 5002",
+  "numerical_control": "Current code with the original sigmoid expression for BCE gradients; isolates this numerical change",
+  "training_data_seed": "1000 + seed",
+  "random_training_context_seed": "2000 + seed, independent of request generator",
+  "validation": {"seed": 72001, "requests": 2000},
+  "test": {"seed": 72002, "requests": 4000},
+  "heldout_vocabulary": {"seed": 72003, "requests": 2000},
+  "architecture": {"layers": 2, "heads": 4, "width": 64, "feedforward": 256},
+  "optimizer": {"name": "AdamW", "peak_lr": 0.003, "warmup_steps": 200},
+  "generator_control": {
+    "fixed_q": "q(n)=0.7; likelihood ratio depends on option count",
+    "fixed_odds": "q(n)=7/(7+n-1); likelihood ratio is always 7"
+  },
+  "context_control": {
+    "isolated": "Original mask; zero context vector",
+    "count": "Original mask; true option count indexes an embedding in the question block",
+    "random_count": "Original mask; independent uniform context index in 2..6",
+    "set": "Question tokens read all options of their own question; option tokens retain their own local block and read pooled context through the question; zero context vector",
+    "nominal_parameters_each": 116993,
+    "context_parameters_each": 448,
+    "active_context_rows": "count/random_count activate rows 2..6; isolated/set use fixed zero context",
+    "initial_context_embeddings": "all zero; shared base parameters identical within each seed"
+  },
+  "primary_metrics": ["posterior_kl", "tv_to_bayes", "nll"],
+  "secondary_metrics": ["accuracy", "brier", "ece", "posterior_squared_error"],
+  "primary_comparisons": ["count minus isolated", "count minus random_count", "set minus isolated"],
+  "analysis_rules": [
+    "Report every condition and every seed, including failed runs.",
+    "Verify matching training-data and initial-parameter hashes within each world/seed block.",
+    "Primary results use raw logits; temperature is fitted only on the validation split.",
+    "Report per-seed results and mean/standard deviation; test items are not independent training replicates.",
+    "Do not generalize this synthetic Choice study to Jev, RLCD or general language performance.",
+    "Do not select hyperparameters or stop training based on the test results."
+  ]
+}

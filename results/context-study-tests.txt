@@ -1,0 +1,11 @@
+test_context_embedding_gradient (__main__.ContextChecks.test_context_embedding_gradient) ... ok
+test_control_world_has_constant_likelihood_ratio (__main__.ContextChecks.test_control_world_has_constant_likelihood_ratio) ... ok
+test_default_generator_unchanged (__main__.ContextChecks.test_default_generator_unchanged) ... ok
+test_isolated_initialization_matches_original (__main__.ContextChecks.test_isolated_initialization_matches_original) ... ok
+test_question_isolation_and_option_symmetry (__main__.ContextChecks.test_question_isolation_and_option_symmetry) ... ok
+test_set_context_preserves_local_option_identity (__main__.ContextChecks.test_set_context_preserves_local_option_identity) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.381s
+
+OK

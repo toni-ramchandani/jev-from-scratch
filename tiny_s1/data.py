@@ -77,16 +77,20 @@ N_POS = MAX_STATE + MAX_Q + MAX_OPT
 
 # ---- sampling one request -------------------------------------------------
 def sample_request(rng, n_opts=(2, 6), topics=None, oos=False, offer_other=False,
-                   name_mode="mixed"):
+                   name_mode="mixed", q_topic=None):
     """Return a request dict with tokens per block, targets and Bayes posteriors.
 
     oos=True: the true topic is NOT among the offered options (forced-choice test).
     offer_other: add an "other" option; if oos, "other" is the correct answer.
     name_mode: "mixed" (training), "topic" (real names), "hidden" (all [UNK]).
+    q_topic: optional cue honesty probability, or a function of option count.
     """
     topics = topics or TRAIN_TOPICS
     n = rng.randint(*n_opts)
     offered = rng.sample(topics, n)
+    q_topic = Q_TOPIC if q_topic is None else (q_topic(n) if callable(q_topic) else float(q_topic))
+    if not 0 < q_topic < 1:
+        raise ValueError("Topic cue honesty must lie strictly between zero and one")
     if oos:
         pool = [t for t in topics if t not in offered]
         true_topic = rng.choice(pool)
@@ -97,7 +101,7 @@ def sample_request(rng, n_opts=(2, 6), topics=None, oos=False, offer_other=False
     # topic cues: honest with prob Q_TOPIC, else a distractor from another offered option
     m = rng.randint(1, 3)
     for _ in range(m):
-        if rng.random() < Q_TOPIC:
+        if rng.random() < q_topic:
             src = true_topic
         else:
             src = rng.choice([t for t in offered if t != true_topic])
@@ -139,7 +143,7 @@ def sample_request(rng, n_opts=(2, 6), topics=None, oos=False, offer_other=False
     # P(t | cues) ∝ r^{k_t}, r = q(n-1)/(1-q), k_t = cue words from topic t.
     if not oos:
         k = np.array([sum(w in TOPICS[t] for w in state) for t in offered], float)
-        r = Q_TOPIC * (n - 1) / (1 - Q_TOPIC)
+        r = q_topic * (n - 1) / (1 - q_topic)
         post = r ** k
         bayes_choice = post / post.sum()
     else:
@@ -251,6 +255,7 @@ def collate(reqs):
                 opt_rows += opts; opt_group += [g] * len(opts); opt_target += q["target"]
                 g += 1
     return dict(ids=ids, pos=pos, seg=seg, mask_bias=mask_bias,
+                kind=kind, qid=qid, oid=oid,
                 opt_rows=np.array(opt_rows, dtype=int), opt_group=np.array(opt_group, dtype=int),
                 opt_target=np.array(opt_target, dtype=float), n_groups=g,
                 noul_rows=np.array(noul_rows, dtype=int), noul_target=np.array(noul_target, dtype=float),
