@@ -119,6 +119,22 @@ this implementation's mask and fixed position offsets.
 
 MIT licensed.
 
+## Numerical comparison tools
+
+Optional tools in [`tiny_s1/numerical`](tiny_s1/numerical/README.md) provide
+matched sigmoid-gradient training, same-state traces, an independent PyTorch
+reference, and analysis of saved predictions. The
+[`digits` comparator](tiny_s1/numerical/digits/README.md) uses a separate shared
+MLP and the original UCI train/test split. Install their separate numerical
+requirements and choose output directories outside the source repository.
+
+The existing Transformer core has FP32 parameters and forward values, but its
+FP64 targets yield mixed backward precision: 24 FP64 and eight FP32 gradient
+arrays in the audited multitask batch. Optimizer moments remain FP32. Equivalent
+gradient expressions are separate numerical training conditions; these tools do
+not assert a general accuracy advantage for either expression. Their provenance
+files distinguish frozen executed sources from portable adaptations.
+
 ## Controlled option-context experiments
 
 The fixed protocol in `experiments/option_context_v1.json` compares isolated

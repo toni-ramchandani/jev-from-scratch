@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "training": {
+    "hidden": [
+      64,
+      32
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "epochs": 50,
+    "batch_size": 128,
+    "lr": 0.001,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0,
+    "probe_updates": [
+      0,
+      1,
+      10,
+      100,
+      500,
+      1500
+    ],
+    "parity_weight": 1,
+    "init_rng": "numpy.default_rng(seed)",
+    "permutation_rng": "numpy.default_rng(1000+seed)",
+    "dtype": "float32",
+    "final_partial_batch": 111
+  },
+  "dataset": {
+    "dataset": "Optical Recognition of Handwritten Digits",
+    "creators": [
+      "E. Alpaydin",
+      "C. Kaynak"
+    ],
+    "year": 1998,
+    "doi": "10.24432/C50P49",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "record_url": "https://archive.ics.uci.edu/dataset/80/optical+recognition+of+handwritten+digits",
+    "changes": "Training inputs converted to FP32 and divided by16; odd/even parity labels derived from digit labels; raw source files unchanged.",
+    "split": "Original writer-disjoint split:30 training writers,13 different test writers; no writer IDs provided.",
+    "files": {
+      "optdigits.tra": {
+        "url": "https://archive.ics.uci.edu/ml/machine-learning-databases/optdigits/optdigits.tra",
+        "bytes": 563639,
+        "sha256": "e1b683cc211604fe8fd8c4417e6a69f31380e0c61d4af22e93cc21e9257ffedd",
+        "shape": [
+          3823,
+          65
+        ],
+        "class_counts": [
+          376,
+          389,
+          380,
+          389,
+          387,
+          376,
+          377,
+          387,
+          380,
+          382
+        ],
+        "parsed_int64_sha256": "cc344e8a7dfd6679ee13e85b6239ba556f611a7dfa3dc690529f7b8ba96d109a"
+      },
+      "optdigits.tes": {
+        "url": "https://archive.ics.uci.edu/ml/machine-learning-databases/optdigits/optdigits.tes",
+        "bytes": 264712,
+        "sha256": "6ebb3d2fee246a4e99363262ddf8a00a3c41bee6014c373ed9d9216ba7f651b8",
+        "shape": [
+          1797,
+          65
+        ],
+        "class_counts": [
+          178,
+          182,
+          177,
+          183,
+          181,
+          182,
+          181,
+          179,
+          174,
+          180
+        ],
+        "parsed_int64_sha256": "e10b10289c0d9d8a1b3e6b7dfe998949029a89056e0e06dfb989924a36d75a3c"
+      },
+      "optdigits.names": {
+        "url": "https://archive.ics.uci.edu/ml/machine-learning-databases/optdigits/optdigits.names",
+        "bytes": 2439,
+        "sha256": "3e82f7202d72a2b7dbdbc324c8c90fe8853164f5d6ab978a071357ad3de89f02"
+      }
+    }
+  },
+  "run_list": [
+    {
+      "mode": "shared",
+      "seed": 0,
+      "expression": "stable"
+    },
+    {
+      "mode": "shared",
+      "seed": 0,
+      "expression": "direct"
+    },
+    {
+      "mode": "shared",
+      "seed": 1,
+      "expression": "stable"
+    },
+    {
+      "mode": "shared",
+      "seed": 1,
+      "expression": "direct"
+    },
+    {
+      "mode": "shared",
+      "seed": 2,
+      "expression": "stable"
+    },
+    {
+      "mode": "shared",
+      "seed": 2,
+      "expression": "direct"
+    },
+    {
+      "mode": "detached",
+      "seed": 0,
+      "expression": "stable"
+    },
+    {
+      "mode": "detached",
+      "seed": 0,
+      "expression": "direct"
+    }
+  ],
+  "validation": {
+    "batch_rows": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "trained_state_updates": 50,
+    "aa_updates": 20,
+    "gradient_tolerances": {
+      "float64": {
+        "atol": 1e-10,
+        "rtol": 1e-09
+      },
+      "float32": {
+        "atol": 3e-06,
+        "rtol": 3e-05
+      }
+    },
+    "identical_gradient_adam_tolerances": {
+      "float64": {
+        "atol": 1e-12,
+        "rtol": 1e-10
+      },
+      "float32": {
+        "atol": 2e-07,
+        "rtol": 2e-05
+      }
+    },
+    "decimal_precision_digits": 80
+  }
+}

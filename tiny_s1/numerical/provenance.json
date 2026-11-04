@@ -1,0 +1,66 @@
+{
+  "format_version": 1,
+  "role": "Source-code provenance, not an experiment result archive",
+  "warning": "Portable adaptations have different source hashes from executed work scripts. Do not relabel recorded experiments as runs of these adapted files.",
+  "unchanged_core_sha256": {
+    "autograd.py": "d9298869a8633d397d222946b8f34ce5d46e9bf85d403a3157241ef8245462eb",
+    "data.py": "5b720309a0fe2fa7520279f0a41aeb3fc8952046b094dfd6f9e372d7cddbd36d",
+    "model.py": "923a65fce5b6902398ac5e28b6a4780e08b8c459568c907b02bcf4bcfe267e3f",
+    "train.py": "65f3ee1f88f849c4f94f63d67df4a30a8b96ccc8c8999cbbe9fcfc4a1c1a7730"
+  },
+  "scripts": {
+    "pilot_train.py": {
+      "frozen_work_source_sha256": "9c23672fd9dbec5e1e340f1afe989772d8799cccf1694bc8893201de461cee4e",
+      "recorded_executed_source_sha256": "9c23672fd9dbec5e1e340f1afe989772d8799cccf1694bc8893201de461cee4e",
+      "execution_status": "Recorded study execution",
+      "portable_adapted_source_sha256": "8ae8b5f4bab1777641eb700089c501cad5843b76e369eef439f95b07b79717ab",
+      "adaptations": [
+        "Core resolved relative to numerical/ parent.",
+        "Explicit evaluation set CLI options and training-only --skip-evaluation.",
+        "Force one BLAS/OpenMP thread before imports."
+      ]
+    },
+    "trace_pairs.py": {
+      "frozen_work_source_sha256": "af850bae72829e74f67f4592c9b1a7ffadd71890b0bff85422ede4cd3d8471b0",
+      "recorded_executed_source_sha256": "af850bae72829e74f67f4592c9b1a7ffadd71890b0bff85422ede4cd3d8471b0",
+      "execution_status": "Recorded study execution",
+      "portable_adapted_source_sha256": "8d21a49b0f9cb4035ab63b9eff51844a47f55761efe012ca026ccaf5885b4a8b",
+      "adaptations": [
+        "Core resolved relative to numerical/ parent; existing explicit output CLI retained."
+      ]
+    },
+    "framework_reference.py": {
+      "frozen_work_source_sha256": "a05fc35248346aa08a829ec3da8aaf25eae59407fd4f97f457c612f25b5b4d1f",
+      "recorded_executed_source_sha256": "a05fc35248346aa08a829ec3da8aaf25eae59407fd4f97f457c612f25b5b4d1f",
+      "execution_status": "Recorded study execution",
+      "portable_adapted_source_sha256": "6459b81938279b9bf9397a70aaef8ff1314452985fd1c3107d347914d2431c8d",
+      "adaptations": [
+        "Core resolved relative to numerical/ parent.",
+        "Explicit required report output.",
+        "Optional explicit --stable-checkpoint and --direct-checkpoint; omitted trained coverage reported.",
+        "Force one BLAS/OpenMP thread before imports."
+      ]
+    },
+    "analyze_pilot.py": {
+      "frozen_work_source_sha256": "5bab326877febb4528725034e38a973f9931a2e5c1bf9eadbb2bb167481f6419",
+      "recorded_executed_source_sha256": "5bab326877febb4528725034e38a973f9931a2e5c1bf9eadbb2bb167481f6419",
+      "execution_status": "Recorded completed exploratory pilot analysis",
+      "portable_adapted_source_sha256": "b275220f97efd245797de7c4a1d455796ff06a8ed48f12f6fb0f2b09c9b5e43e",
+      "adaptations": [
+        "Explicit --data-root and --output-dir.",
+        "Prediction-archive input hashes recorded.",
+        "Force one BLAS/OpenMP thread before imports."
+      ]
+    }
+  },
+  "environment_pins": {
+    "python": "3.12.14",
+    "numpy": "2.5.4",
+    "torch": "2.15.0+cpu"
+  },
+  "verification_scope": "Separate local smoke checks verified two-update pilot/trace array equivalence, initial/optional-checkpoint framework CLI behavior, and analysis metric-function equivalence. No full portable training run is claimed.",
+  "technical_document_sha256": {
+    "README.md": "461b717c990905f54dac3798295aaa7f34e5044abeedfffc3bb8cc1554a48074",
+    "requirements-numerical.txt": "946615d3eb5fdc9bd9fd7fc8d11a6d6485785f0c2e236f0bd1c72686df06c8ae"
+  }
+}

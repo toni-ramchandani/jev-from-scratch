@@ -1,0 +1,7 @@
+# Recorded direct numerical dependencies. Python 3.12.14 was used.
+# Official CPU index; platform-specific installation guidance:
+# https://pytorch.org/get-started/locally/
+--extra-index-url https://download.pytorch.org/whl/cpu
+numpy==2.5.4
+torch==2.15.0+cpu
+sympy==1.13.3

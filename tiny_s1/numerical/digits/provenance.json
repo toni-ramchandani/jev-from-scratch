@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "role": "Source provenance; no experimental outcomes",
+  "original_executed_sha256": {
+    "mlp.py": "0c6c5b94d6caa562bd55c32daf822c0841578bfcdf49a6a2c3ea2b0de5431bd3",
+    "train.py": "3e7ae11224de983f67742a2ec570ae8a41a86004862d9224732d60062b911d1f",
+    "validate.py": "ec9b9dea501a34844886658053f6ab8e36af85a2233780e1410c1ca994484e4e"
+  },
+  "original_execution_protocol_sha256": "fe3df3d17e4fd0ada9b8cbc7e4c11cacb1ef0b6c511cde71404178e6950a2247",
+  "portable_sha256": {
+    "mlp.py": "0c6c5b94d6caa562bd55c32daf822c0841578bfcdf49a6a2c3ea2b0de5431bd3",
+    "train.py": "b0e918076f17a359f88cf84f7ef8af3da6f611f19ee65a8e3619a1397dc6e6d9",
+    "validate.py": "d29aaa73b7db1ba7288fc07830892c929e76079b260f3c70aef5735ea5d44a68",
+    "fetch_data.py": "18f8a07ccaa49feaa2957298d523d5c4d9dc33cebc6092033c8d73c93a57923c",
+    "protocol.json": "947e086c234c61b6cdec4508a3e7e4813986c66ee44f98abd57554afb537e28d",
+    "README.md": "607791ff7dc9ff6e8d88988a38b1afcee902d17b7e96d71586b956daf12993f0"
+  },
+  "original_execution_environment": {
+    "python": "3.12.14",
+    "numpy": "2.5.4",
+    "torch": "2.15.0+cpu"
+  },
+  "changes": [
+    "Removed workspace-specific dependency injection; use installed environment",
+    "Default generated data/output paths are outside the repository",
+    "Hash local technical protocol.json in gates/freezes instead of external document",
+    "Skip preflight self-copy when the gate is already in the output directory",
+    "Validate official pinned data hashes; add official UCI download/verification entry point",
+    "Core mlp.py bytes and training-pair/reference arithmetic functions preserved"
+  ],
+  "equivalence_scope": "Byte-identical MLP core and AST-identical training-pair and reference-math functions; private packaging checks retained separately"
+}
