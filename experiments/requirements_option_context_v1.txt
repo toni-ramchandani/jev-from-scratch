@@ -1,0 +1,2 @@
+# Recorded execution: Python 3.12.14, 64-bit Windows, one BLAS thread.
+numpy==2.5.4

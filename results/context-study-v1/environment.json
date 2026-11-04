@@ -1,0 +1,18 @@
+{
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "numpy": "2.5.4",
+  "system": "Windows",
+  "release": "11",
+  "machine": "AMD64",
+  "processor": "Intel64 Family 6 Model 198 Stepping 2, GenuineIntel",
+  "blas": {
+    "name": "scipy-openblas",
+    "version": "0.3.34.106.0",
+    "openblas configuration": "OpenBLAS 0.3.34.106.0  USE64BITINT DYNAMIC_ARCH NO_AFFINITY Haswell MAX_THREADS=24",
+    "found": true
+  },
+  "worker_blas_threads": 1,
+  "source_commit": "c4e1ad0bf3275f600e0970b5a4a663890a0eb078",
+  "note": "Environment inspected in the same unchanged dependency installation used by the workers.",
+  "wall_clock_interruption": "A late execution interval jumped from about 3734 to 6227 elapsed seconds while training advanced about 600 updates. Raw durations retain this interruption; learning rates depend on update count."
+}

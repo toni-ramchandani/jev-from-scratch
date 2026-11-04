@@ -86,6 +86,7 @@ tracking.write_text(json.dumps({'training_data_sha256':digest.hexdigest(),'initi
     env = os.environ.copy()
     env['REPRO_ORIGINAL_SIGMOID'] = '1' if args.variant == 'current_original_sigmoid' else '0'
     subprocess.run(command, cwd=checkpoints, env=env, check=True,
+                   stdout=sys.stdout, stderr=sys.stderr,
                    creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
     training_seconds = time.perf_counter()-start
     records = run_model(load('stream', checkpoints), make_set(5002, 4000))

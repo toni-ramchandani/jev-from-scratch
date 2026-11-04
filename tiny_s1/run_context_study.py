@@ -8,6 +8,7 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+import numpy as np
 from context_study import atomic_json
 from reproduce_training import source_directory
 
@@ -42,6 +43,21 @@ def main():
     source_hashes = {name: hashlib.sha256((source/name).read_bytes()).hexdigest()
                      for name in ('context_study.py', 'data.py', 'autograd.py', 'model.py', 'train.py', 'baselines.py')}
     env = dict(os.environ)
+    # A downloaded ZIP can have no Git history, or live inside an unrelated
+    # parent checkout. Always retain file hashes; record HEAD only for this repo.
+    if not env.get('EXPERIMENT_SOURCE_COMMIT'):
+        try:
+            top = subprocess.run(['git','rev-parse','--show-toplevel'], cwd=source.parent,
+                                 capture_output=True, text=True, check=True)
+            if Path(top.stdout.strip()).resolve() == source.parent.resolve():
+                head = subprocess.run(['git','rev-parse','HEAD'], cwd=source.parent,
+                                      capture_output=True, text=True, check=True)
+                clean = subprocess.run(['git','diff','--quiet','HEAD','--','tiny_s1','experiments'],
+                                       cwd=source.parent, capture_output=True)
+                if clean.returncode == 0:
+                    env['EXPERIMENT_SOURCE_COMMIT'] = head.stdout.strip()
+        except (OSError, subprocess.CalledProcessError):
+            pass
     for key in ('OPENBLAS_NUM_THREADS', 'OMP_NUM_THREADS', 'MKL_NUM_THREADS', 'NUMEXPR_NUM_THREADS'):
         env[key] = '1'
     active = {}
@@ -59,12 +75,16 @@ def main():
                 valid = (not saved.get('pilot') and 'test' in saved
                          and all(config[k] == job[k] for k in ('world', 'mode', 'seed'))
                          and config['steps'] == protocol['steps'] and config['batch'] == protocol['batch']
-                         and config['source_sha256'] == source_hashes)
+                         and config['source_sha256'] == source_hashes
+                         and config['numpy'] == np.__version__ and config['python'] == sys.version
+                         and config['blas_threads'] == '1')
             else:
                 reference = {name:hashlib.sha256((source_directory(job['variant'])/name).read_bytes()).hexdigest()
                              for name in ('autograd.py','data.py','model.py','train.py')}
                 valid = (config['variant']==job['variant'] and config['steps']==protocol['steps']
                          and config['batch']==protocol['batch'] and config['source_sha256']==reference
+                         and saved['execution']['numpy'] == np.__version__
+                         and saved['execution']['python'] == sys.version
                          and 'choice' in saved)
             if not valid:
                 raise ValueError(f'Existing result does not match this execution: {run_dir}')

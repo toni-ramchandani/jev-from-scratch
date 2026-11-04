@@ -101,8 +101,9 @@ The recorded full runs use seed 0, 4,000 steps and batch 32.
 
 These are Choice accuracies on the same synthetic test split. Re-evaluating the
 supplied weights reproduces their accuracy; new training does not reproduce the
-stronger stream/other results. The cause is unresolved. One seed per regime is
-insufficient to characterize training variability.
+stronger stream/other results. The stream discrepancy is partly diagnosed by the common-environment controls
+below. The supplied archive is still not recovered exactly. One seed per
+multitask regime is insufficient to characterize training variability.
 
 `artifacts/` contains weights and training logs; `results/` contains machine-readable
 evaluations and checks. `results/summary.csv` compares the recorded conditions.
@@ -128,6 +129,9 @@ single-expression numerical control in the same environment.
 `experiments/reference_numpy/` preserves only the four
 provided training source files for that comparison.
 
+The recorded NumPy version can be installed from the repository root with
+`python -m pip install -r experiments/requirements_option_context_v1.txt`.
+
 ```bash
 cd tiny_s1
 python test_context_study.py
@@ -144,6 +148,7 @@ the same protocol and request streams:
 
 ```bash
 python context_baselines.py --protocol ../experiments/option_context_v1.json --output ../artifacts/context-study-v1/lexical-controls.json
+python verify_training_streams.py --output ../artifacts/context-study-v1/training-stream-replay.json
 python analyze_context_study.py --study-dir ../artifacts/context-study-v1
 ```
 
@@ -152,3 +157,61 @@ permutation checks and metrics recomputed from saved predictions. It reports
 all seeds, raw results, validation-only temperature scaling and paired
 comparisons. Three-seed standard deviations describe training variability;
 they are distinct from uncertainty over test examples.
+Source-file hashes are always recorded. A clean Git checkout also records its
+commit; `EXPERIMENT_SOURCE_COMMIT` can supply that identifier explicitly.
+
+## Completed option-context study
+
+All 24 registered Choice-only runs and three multitask reproduction controls
+completed. Training source is commit
+`c4e1ad0bf3275f600e0970b5a4a663890a0eb078`. Source and checkpoint hashes,
+matched training streams, software conditions and metrics recomputed from
+saved predictions pass the recorded checks. The largest option-order
+probability difference is 8.43e-7.
+
+Values below are mean (sample SD) over three training seeds. KL compares the
+full distribution with the known posterior; lower is better.
+
+| World | Variant | Posterior KL | Choice accuracy (%) |
+|---|---|---:|---:|
+| q=0.7 | isolated | 0.1444 (0.0438) | 69.36 (0.87) |
+| q=0.7 | count | 0.1848 (0.0677) | 66.99 (2.94) |
+| q=0.7 | random context | 0.2028 (0.0440) | 66.74 (1.65) |
+| q=0.7 | question pooling | 0.1581 (0.0762) | 68.35 (1.60) |
+| odds=7 | isolated | 0.1656 (0.0679) | 70.68 (1.66) |
+| odds=7 | count | 0.1105 (0.0198) | 71.45 (0.50) |
+| odds=7 | random context | 0.1028 (0.0143) | 71.82 (0.96) |
+| odds=7 | question pooling | 0.1190 (0.0284) | 71.82 (0.98) |
+
+The count/pooling interventions do not demonstrate a consistent improvement.
+All six paired KL intervals include zero. In the original world, Count has
+lower ECE but worse mean KL, TV, NLL and accuracy than Isolated. In the
+fixed-odds control, Random context has lower mean KL than Count. These are
+limited three-seed, fixed-budget results on the synthetic generator.
+
+The matched lexical controls reach 73.125% accuracy in the original world and
+75.650% in the fixed-odds world on the new test set. Their known-noise reference
+has the same ranking. The original-world count-conditioned fit has mean KL
+about 6.16e-6; the fixed-odds fixed-scale fit has mean KL about 1.20e-6.
+
+The common-environment multitask controls use the legacy test set:
+
+| Training source | Choice accuracy (%) | Array comparison |
+|---|---:|---|
+| Provided source | 64.475 | Exactly matches the expression control |
+| Reviewed source | 50.925 | Exactly matches the earlier fresh checkpoint |
+| Reviewed source, original sigmoid expression | 64.475 | Exactly matches provided-source rerun |
+
+All three have identical initial weights and training inputs/targets. The
+expression control changes only the mathematically equivalent sigmoid used
+for BCE gradients. The 13.55-point difference is a seed-0 numerical sensitivity
+finding, not evidence that one expression generally trains better models.
+The supplied 66.650% checkpoint is still 2.175 points above the original-source
+rerun. The fixed/escape-regime training gaps have not received these controls.
+
+Raw records, all seeds, paired comparisons, secondary temperature scaling,
+lexical controls and environment information are in `results/context-study-v1/`.
+These Choice-only results use different task mix and test seeds from the older
+multitask runs. Raw elapsed durations retain a roughly forty-minute interruption
+and are not uninterrupted throughput measurements. The protocol commands
+generate full weights and per-request predictions locally.

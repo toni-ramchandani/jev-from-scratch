@@ -6,3 +6,7 @@ __pycache__/
 
 # Generated diagnostic plots
 **/figures/
+
+# Generated controlled-study checkpoints, predictions and execution snapshots
+artifacts/context-study-v1/
+artifacts/runs/

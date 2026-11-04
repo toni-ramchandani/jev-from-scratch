@@ -1,0 +1,31 @@
+{
+  "role": "Independent deterministic data replay, not a training execution",
+  "steps": 4000,
+  "batch": 32,
+  "seed": 1000,
+  "numpy": "2.5.4",
+  "fields_compared_exactly": [
+    "ids",
+    "pos",
+    "seg",
+    "opt_rows",
+    "opt_group",
+    "opt_target",
+    "noul_rows",
+    "noul_target",
+    "mask_bias"
+  ],
+  "all_arrays_identical": true,
+  "source_sha256": {
+    "experiments\\reference_numpy\\data.py": "c4350c6d7dac1020b83c5c58607172df71ca68b456ea7ba85d67d9c81b89f636",
+    "tiny_s1\\data.py": "5b720309a0fe2fa7520279f0a41aeb3fc8952046b094dfd6f9e372d7cddbd36d"
+  },
+  "execution_fingerprint": [
+    "275643273bfd2f78c4d4230a729b86ea7bab86618723f8bfa801fdccd72aa7b4",
+    "275643273bfd2f78c4d4230a729b86ea7bab86618723f8bfa801fdccd72aa7b4"
+  ],
+  "binary_target_sha256": [
+    "0603bcf12bcdccfff9cd7358eb088209a69f127b8f21b7cfc508946c0582f742",
+    "0603bcf12bcdccfff9cd7358eb088209a69f127b8f21b7cfc508946c0582f742"
+  ]
+}

@@ -107,7 +107,13 @@ def main():
                        'initial_parameters_sha256': next(iter(initial)), 'lexical_data_match': True})
     source_commits = {r['config']['source_commit'] for r in rows.values()}
     source_hashes = {json.dumps(r['config']['source_sha256'], sort_keys=True) for r in rows.values()}
-    assert len(source_commits) == len(source_hashes) == 1 and None not in source_commits
+    assert len(source_commits) == len(source_hashes) == 1
+    environment_keys = ('numpy','python','platform','processor','blas_threads')
+    environments = {tuple(r['config'][k] for k in environment_keys) for r in rows.values()}
+    assert len(environments) == 1
+    common_environment = dict(zip(environment_keys,next(iter(environments))))
+    assert common_environment['blas_threads'] == '1'
+    assert lexical['config']['numpy'] == common_environment['numpy']
     reproduction, reproduction_missing = {}, []
     for variant in protocol['reproduction_controls']:
         path = root/'reproduction'/variant/'results.json'
@@ -119,6 +125,12 @@ def main():
         assert len({r['execution']['training_data_sha256'] for r in reproduction.values()}) == 1
         assert len({r['execution']['initial_parameter_sha256'] for r in reproduction.values()}) == 1
         assert all(r['config']['source_commit'] in source_commits for r in reproduction.values())
+        assert all(r['execution']['numpy'] == common_environment['numpy']
+                   and r['execution']['python'] == common_environment['python'] for r in reproduction.values())
+    replay = json.loads((root/'training-stream-replay.json').read_text(encoding='utf-8'))
+    assert replay['all_arrays_identical'] and replay['steps'] == protocol['steps'] and replay['batch'] == protocol['batch']
+    assert replay['numpy'] == common_environment['numpy']
+    assert set(replay['execution_fingerprint']) == {r['execution']['training_data_sha256'] for r in reproduction.values()}
     reproduction_differences = {}
     for first, second in itertools.combinations(reproduction, 2):
         reproduction_differences[first+' minus '+second] = weight_difference(
@@ -153,11 +165,13 @@ def main():
                'protocol_sha256': progress['protocol_sha256'], 'counts': progress['counts'],
                'failed_context_runs': missing, 'failed_reproduction_runs': reproduction_missing,
                'integrity': {'matched_blocks': blocks, 'shared_source_sha256': json.loads(next(iter(source_hashes))),
+                             'common_environment': common_environment,
                              'prediction_metrics_recomputed': True, 'test_targets_and_posteriors_match': True,
                              'max_option_order_error': max(r['option_order_max_abs_difference'] for r in rows.values())},
                'groups': groups, 'paired_comparisons': comparisons, 'exploratory_interactions': interaction,
                'uncertainty': 'SD across training seeds; paired t intervals with df=2 when all three seeds complete. No multiplicity-adjusted significance claims.',
                'reproduction': reproduction, 'reproduction_weight_differences': reproduction_differences,
+               'training_stream_replay': replay,
                'analysis_script_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
     atomic_json(root/'summary.json', summary)
     atomic_json(root/'all-context-runs.json', [{'world':w, 'mode':m, 'seed':s, **r} for (w,m,s),r in rows.items()])
